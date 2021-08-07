@@ -1,10 +1,10 @@
 name: FakeElytra
 description: Allows you to glide without an Elytra.
-version: 1.0-SNAPSHOT
+version: 1.1-SNAPSHOT
 api-version: 1.17
 author: AMDBartek
 website: https://github.com/AMDBartek/FakeElytra/
-main: com.amdbartek.FakeElytra.Main
+main: com.amdbartek.FakeElytra.FakeElytra
 
 permissions:
   fakeelytra.glide:

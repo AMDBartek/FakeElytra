@@ -14,7 +14,7 @@ import org.bukkit.entity.LivingEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends JavaPlugin implements Listener, CommandExecutor {
+public class FakeElytra extends JavaPlugin implements Listener, CommandExecutor {
 
     public List<Player> flyingPlayers = new ArrayList<>();
 
