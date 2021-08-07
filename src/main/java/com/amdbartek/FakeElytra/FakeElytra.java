@@ -9,19 +9,24 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityToggleGlideEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FakeElytra extends JavaPlugin implements Listener, CommandExecutor {
 
-    public List<Player> flyingPlayers = new ArrayList<>();
+    public List<Player> glidingPlayers = new ArrayList<>();
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityToggleGlideEvent(EntityToggleGlideEvent e) {
-        if (flyingPlayers.contains((Player)e.getEntity())) {
+        if (glidingPlayers.contains((Player)e.getEntity())) {
             e.setCancelled(true);
+            if (this.getConfig().getBoolean("cancel-when-on-ground")) {
+                if (e.getEntity().isOnGround()) {
+                    glidingPlayers.remove((Player)e.getEntity());
+                    ((Player)e.getEntity()).getPlayer().setGliding(false);
+                }
+            }
         }
     }
 
@@ -29,12 +34,12 @@ public class FakeElytra extends JavaPlugin implements Listener, CommandExecutor 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            if (flyingPlayers.contains((Player)sender)) {
-                flyingPlayers.remove((Player)sender);
+            if (glidingPlayers.contains((Player)sender)) {
+                glidingPlayers.remove((Player)sender);
                 player.getPlayer().setGliding(false);
                 player.getPlayer().sendMessage("Stopped gliding.");
             } else {
-                flyingPlayers.add((Player)sender);
+                glidingPlayers.add((Player)sender);
                 player.getPlayer().setGliding(true);
                 player.getPlayer().sendMessage("Started gliding.");
             }
@@ -47,6 +52,7 @@ public class FakeElytra extends JavaPlugin implements Listener, CommandExecutor 
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
+        this.saveDefaultConfig();
         getLogger().info("FakeElytra enabled");
     }
 

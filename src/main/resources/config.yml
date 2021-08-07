@@ -1,0 +1,5 @@
+# FakeElytra by AMDBartek
+
+# Cancel gliding once the player touches the ground.
+# Default: true
+cancel-when-on-ground: true
