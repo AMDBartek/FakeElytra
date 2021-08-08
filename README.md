@@ -1,5 +1,4 @@
-![Alt text](https://raw.githubusercontent.com/AMDBartek/FakeElytra/main/FakeElytra.png "FakeElytra icon") # FakeElytra
-Allows you to glide without an Elytra.
+![Alt text](https://raw.githubusercontent.com/AMDBartek/FakeElytra/main/FakeElytra.png "FakeElytra icon") # FakeElytra Allows you to glide without an Elytra.
 
 # Commands and Permissions
 /glide - Glide without an Elytra (toggle). (fakeelytra.glide)
